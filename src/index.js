@@ -67,15 +67,17 @@ function expressionCalculator(expr) {
             outLine.push(stack.pop());
         }
 
-    for (let i = 0; outLine.length>=i; i++ )
-            if (outLine[i] in operators) {
-                let [a, b] = [
-                    Number(outLine.splice(i - 2, 1)),
-                    Number(outLine.splice(i - 2, 1))];
-                outLine[i-2] = operators[outLine[i-2]](a, b);
-                i = i-2;
-            }
+    for (let i = 0; outLine.length >= i; i++)
+        if (outLine[i] in operators) {
+            let [a, b] = [
+                Number(outLine.splice(i - 2, 1)),
+                Number(outLine.splice(i - 2, 1))];
+            outLine[i - 2] = operators[outLine[i - 2]](a, b);
+            i = i - 2;
+        }
 
+    if (outLine[0] === Infinity)
+        throw 'TypeError: Devision by zero.';
     return !outLine[0].isNaN ? outLine.pop() : null;
 }
 
